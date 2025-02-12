@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../shared/styles/main.css">
+    <link rel="stylesheet" type="text/css" href="./settings.css">
+    <title>System Settings</title>
+</head>
+<body>
+    <header>
+        🐾 🌿
+        <button id="home-button">
+            <img src="../shared/images/home.png" alt="Home Button" title="Home Page Button">
+        </button>
+        🐾 🌿
+        <div class="header-top">
+            <div class="greeting">
+                <span id="current-datetime"></span>
+            </div>
+        </div>
+        <div class="header-main">
+            <h1>Critters Pet Shop</h1>
+            <h2 id="page-title">System Settings</h2>
+        </div>
+    </header>
+    <main>
+        <section id="info">
+            <h3>Company Information</h3>
+            <div class= "company-info-group">    
+                <label for="company-name">Company Name:</label>
+                <input type="text" id="company-name" name="company-name">
+                <label for="website">Website:</label>
+                <input type="text" id="company-website" name="company-website">
+                <label for="company-email">Email:</label>
+                <input type="email" id="company-email" name="company-email">
+                <label for="company-address">Address 1:</label>
+                <input type="text" id="company-address" name="company-address">
+                <label for="company-address">Address 2:</label>
+                <input type="text" id="company-address" name="company-address">
+                <label for="company-address">City:</label>
+                <input type="text" id="company-address" name="company-address">
+                <label for="company-address">State:</label>
+                <input type="text" id="company-address" name="company-address">
+                <label for="company-address">Zip Code:</label>
+                <input type="text" id="company-address" name="company-address">
+                <label for="company-phone">Phone:</label>
+                <input type="tel" id="company-phone" name="company-phone">
+            </div>
+        </section>  
+        <section >
+            <h3>Business Hours</h3>
+            <div class="business-hours">
+                <h4>Weekdays</h4>
+                    <label>Open: <input type="time" id="weekday-open"></label>
+                    <label>Close: <input type="time" id="weekday-close"></label>
+                <h4>Saturday</h4>
+                    <label>Open: <input type="time" id="saturday-open"></label>
+                    <label>Close: <input type="time" id="saturday-close"></label>
+                <h4>Sunday</h4>
+                    <label>Open: <input type="time" id="sunday-open"></label>
+                    <label>Close: <input type="time" id="sunday-close"></label>
+            </div>
+        </section>
+
+        <section >
+            <h3>System Settings</h3>
+            <div class="form-group">
+                <label for="low-stock-threshold">Low Stock Alert Threshold:</label>
+                <input type="number" id="low-stock-threshold" min="0">
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="email-notifications">
+                    Enable Email Notifications
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="auto-backup">
+                    Enable Automatic Backups
+                </label>
+            </div>
+        </section>
+
+        <section>
+            <h3>Tax Settings</h3>
+            <div class="form-group">
+                <label for="tax-rate">Sales Tax Rate (%):</label>
+                <input type="number" id="tax-rate" min="0" max="100" step="0.01">
+            </div>
+        </section>
+
+        <div class="button-group">
+            <button id="save-settings">Save Settings</button>
+            <button id="reset-settings">Reset to Defaults</button>
+        </div>
+    </main>
+    <div class="footer-decorator"></div>
+    <footer>
+        <img src="../shared/images/logo v10000.jpg" alt="Cipher Claw 13 Logo">
+        <br>
+        <a href="#">Contact Me</a>
+        Made with <span style="color:black;">&hearts;</span> by Auntie Beans
+    </footer>
+    <script src="../shared/scripts/common.js"></script>
+    <script src="./settings.js"></script>
+</body>
+</html>
