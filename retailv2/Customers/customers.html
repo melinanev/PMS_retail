@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../shared/styles/main.css">
+    <link rel="stylesheet" type="text/css" href="./customers.css">
+    <title>Customer Management</title>
+</head>
+<body>
+    <header>
+        🐾 🌿
+        <button id="home-button">
+            <img src="../shared/images/home.png" alt="Home Button" title="Home Page Button">
+        </button>
+        🐾 🌿
+        <div class="header-top">
+            <div class="greeting">
+                <span id="current-datetime"></span>
+            </div>
+        </div>
+        <div class="header-main">
+            <h1>Critters of South Elgin</h1>
+            <h2 id="page-title">Customer Management</h2>
+        </div>
+    </header>
+    <main>
+        <nav class="customer-nav">
+            <button id="add-customer">Add New Customer</button>
+            <button id="import-customers">Import Customers</button>
+            <button id="export-data">Export Data</button>
+        </nav>
+        <section class="search-section">
+            <input type="text" placeholder="Search customers..." id="customer-search">
+            <select id="status-filter">
+                <option value="">All Status</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+            </select>
+        </section>
+        <section class="customer-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Pets</th>
+                        <th>Last Visit</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table content will be populated dynamically -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <div class="footer-decorator"></div>
+    <footer>
+        <img src="../shared/images/logo v10000.jpg" alt="Cipher Claws 13 Logo">
+    </footer>
+    <script src="../shared/scripts/common.js"></script>
+</body>
+</html>
