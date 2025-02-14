@@ -1,6 +1,7 @@
 import express from 'express';
 import type { Request, Response } from 'express';
 import { User } from '../../models/index.js';
+import bcrypt from 'bcryptjs';
 
 const router = express.Router();
 
@@ -8,7 +9,7 @@ const router = express.Router();
 router.get('/', async (_req: Request, res: Response) => {
   try {
     const users = await User.findAll({
-      attributes: { exclude: ['password'] }
+      attributes: { exclude: ['password'] },
     });
     res.json(users);
   } catch (error: any) {
@@ -16,12 +17,13 @@ router.get('/', async (_req: Request, res: Response) => {
   }
 });
 
-// GET /users/:id - Get a user by id
+// This gets sources a user by id and excludes passwords in the request
+
 router.get('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     const user = await User.findByPk(id, {
-      attributes: { exclude: ['password'] }
+      attributes: { exclude: ['password'] },
     });
     if (user) {
       res.json(user);
@@ -33,26 +35,47 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
-// POST /users - Create a new user
+// This post defines a user by params and sets them for registration 
+
 router.post('/', async (req: Request, res: Response) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, role } = req.body;
+
+  if (!username || !email || !password) {
+    return res.status(400).json({ message: 'Please provide all required fields' });
+  }
+
+  //This crazy thing ensures the email registration is formatted correctly
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ message: 'Invalid email format' });
+  }
+
+  //This section takes the provided password and hashes it for security
+
   try {
-    const newUser = await User.create({ username, email, password });
+    const hashedPassword = await bcrypt.hash(password, 10); 
+    const newUser = await User.create({ username, email, password: hashedPassword, role });
     res.status(201).json(newUser);
   } catch (error: any) {
     res.status(400).json({ message: error.message });
   }
 });
 
-// PUT /users/:id - Update a user by id
+// This allows a user to be updated 
+
 router.put('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(400).json({ message: 'Please provide username and password' });
+  }
+
   try {
     const user = await User.findByPk(id);
     if (user) {
       user.username = username;
-      user.password = password;
+      user.password = await bcrypt.hash(password, 10); // Hash the new password
       await user.save();
       res.json(user);
     } else {
@@ -63,7 +86,8 @@ router.put('/:id', async (req: Request, res: Response) => {
   }
 });
 
-// DELETE /users/:id - Delete a user by id
+// This route allows a user to be deleted from the database
+
 router.delete('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
@@ -80,3 +104,4 @@ router.delete('/:id', async (req: Request, res: Response) => {
 });
 
 export { router as userRouter };
+

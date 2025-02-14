@@ -1,20 +1,27 @@
-const forceDatabaseRefresh = false;
-
 import express from 'express';
-import sequelize from './config/connection.js';
-import routes from './routes/index.js';
+import dotenv from 'dotenv';
+import { userRouter } from './routes/api/user-routes';
+import { inventoryRouter } from './routes/api/inventory-routes';
+import { workSessionRouter } from './routes/api/work-session-routes';
+import { authenticateToken } from './middleware/auth';
+
+// Load environment variables
+dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5000;
 
-// Serves static files in the entire client's dist folder
-app.use(express.static('../client/dist'));
 
-app.use(express.json());
-app.use(routes);
+// Routes
+app.use('/users', userRouter);
+app.use('/inventory', authenticateToken, inventoryRouter);
+app.use('/work-sessions', authenticateToken, workSessionRouter);
 
-sequelize.sync({ force: forceDatabaseRefresh }).then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
-  });
+app.get('/', (_req, res) => {
+  res.send('API is running...');
 });
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
