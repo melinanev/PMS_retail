@@ -2,7 +2,7 @@ import type { UserLogin } from '../interfaces/UserLogin';
 
 const login = async (userInfo: UserLogin) => {
   try {
-    const response = await fetch('/auth/login', {
+    const response = await fetch('/auth-routes/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -15,6 +15,8 @@ const login = async (userInfo: UserLogin) => {
     if (!response.ok) {
       throw new Error('User information not retrieved, check network tab!');
     }
+
+    localStorage.setItem('token', data.token);
 
     return data;
   } catch (err) {

@@ -1,60 +1,64 @@
-import { useState, useEffect, useLayoutEffect } from "react";
-import { retrieveUsers } from "../api/userAPI";
-import type { UserData } from "../interfaces/UserData";
-import ErrorPage from "./ErrorPage";
-import UserList from '../components/Users';
-import auth from '../utils/auth';
+import { useEffect, useState } from 'react';
+import '../index.css'; // Import your styles
 
 const Home = () => {
+  const [currentTime, setCurrentTime] = useState<string>('');
 
-    const [users, setUsers] = useState<UserData[]>([]);
-    const [error, setError] = useState(false);
-    const [loginCheck, setLoginCheck] = useState(false);
-
-    useEffect(() => {
-        if (loginCheck) {
-            fetchUsers();
-        }
-    }, [loginCheck]);
-
-    useLayoutEffect(() => {
-        checkLogin();
-    }, []);
-
-    const checkLogin = () => {
-        if (auth.loggedIn()) {
-            setLoginCheck(true);
-        }
+  useEffect(() => {
+    const updateTime = () => {
+      setCurrentTime(`Hello, Employee! The current local time is: ${new Date().toLocaleString()}`);
     };
+    updateTime();
+    const interval = setInterval(updateTime, 60000); // Update every minute
+    return () => clearInterval(interval); // Cleanup interval
+  }, []);
 
-    const fetchUsers = async () => {
-        try {
-            const data = await retrieveUsers();
-            setUsers(data)
-        } catch (err) {
-            console.error('Failed to retrieve tickets:', err);
-            setError(true);
-        }
-    }
+  const Button = ({ label }: { label: string }) => (
+    <button className="btn btn-primary mx-1 my-1">{label}</button>
+  );
 
-    if (error) {
-        return <ErrorPage />;
-    }
+  return (
+    <div className="mint-green text-center min-100-vh">
+      <header className="header bg-info py-3">
+        🐾 🌿
+        <button id="home-button" className="btn btn-light">
+          <img src="../shared/images/home.png" alt="Home Button" title="Home Page Button" />
+        </button>
+        🐾 🌿
+        <div className="header-top my-2">
+          <span className="text-dark">{currentTime}</span>
+        </div>
+        <div className="header-main">
+          <h1 className="text-white">VETRA</h1>
+          <h2 id="page-title" className="text-white">Home Page</h2>
+        </div>
+      </header>
 
-    return (
-        <>
-            {
-                !loginCheck ? (
-                    <div className='login-notice'>
-                        <h1>
-                            Login to view all your friends!
-                        </h1>
-                    </div>
-                ) : (
-                    <UserList users={users} />
-                )}
-        </>
-    );
+      <main className="p-4">
+        <div className="flex-row justify-center">
+          <Button label="Time Clock" />
+          <Button label="Payroll" />
+          <Button label="Inventory" />
+          <Button label="Customers" />
+        </div>
+
+        <div className="flex-row justify-center mt-3">
+          <Button label="Reports" />
+          <Button label="Settings" />
+          <Button label="Log Out" />
+          <Button label="Billing" />
+          <Button label="PLACEHOLDER" />
+        </div>
+      </main>
+
+      <footer className="bg-dark text-white py-3">
+        <img src="../shared/images/logo v10000.jpg" alt="Cipher Claw 13 Logo" className="mb-2" />
+        <br />
+        <a href="#" className="text-link">Contact Me</a>
+        <p>Made with <span style={{ color: 'black' }}>&hearts;</span> by Auntie Beans</p>
+      </footer>
+    </div>
+  );
 };
 
 export default Home;
