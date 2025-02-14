@@ -6,6 +6,7 @@ interface UserAttributes {
   username: string;
   email: string;
   password: string;
+  role: 'manager' | 'employee';
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
@@ -18,14 +19,20 @@ export class User
   public username!: string;
   public email!: string;
   public password!: string;
+  public role!: 'manager' | 'employee';
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
-  // Hash the password before saving the user
+  // Hash password before saving
   public async setPassword(password: string) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(password, saltRounds);
+  }
+
+  // This validates the password by comparing the saved password and the one entered
+  public async validatePassword(password: string): Promise<boolean> {
+    return bcrypt.compare(password, this.password);
   }
 }
 
@@ -40,13 +47,20 @@ export function UserFactory(sequelize: Sequelize): typeof User {
       username: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
+        validate: { isEmail: true },
       },
       password: {
         type: DataTypes.STRING,
+        allowNull: false,
+      },
+      role: {
+        type: DataTypes.ENUM('manager', 'employee'),
         allowNull: false,
       },
     },
@@ -58,7 +72,9 @@ export function UserFactory(sequelize: Sequelize): typeof User {
           await user.setPassword(user.password);
         },
         beforeUpdate: async (user: User) => {
-          await user.setPassword(user.password);
+          if (user.changed('password')) {
+            await user.setPassword(user.password);
+          }
         },
       },
     }

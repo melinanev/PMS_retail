@@ -1,5 +1,35 @@
 -- DROP DATABASE
-DROP DATABASE IF EXISTS friends_db;
+DROP DATABASE IF EXISTS authUser_db;
 
 -- CREATE DATABASE
-CREATE DATABASE friends_db;
+CREATE DATABASE authUser_db;
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    role VARCHAR(20) NOT NULL CHECK (role IN ('manager', 'employee')),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_login TIMESTAMP
+);
+
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    quanity INT NOT NULL DEFAULT 0,
+    price DECIMAL(10, 2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE WORK_SESSION (
+    id SERIAL PRIMARY KEY,
+    employee_id INT NOT NULL,
+    clock_in TIMESTAMP NOT NULL,
+    clock_out TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (employee_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
