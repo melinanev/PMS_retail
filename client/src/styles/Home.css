@@ -1,0 +1,108 @@
+/* Home.css */
+
+/* Full Page Layout */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: calc(100vh - 7vh); /* Adjust height to account for navbar */
+  background-color: #e6dbcf; /* Beige background */
+  padding: 0;
+  overflow: hidden;
+}
+
+/* HEADER */
+.header {
+  width: 100%;
+  height: 18vh; /* Expanded for better balance */
+  background-color: #d4c3af;
+  padding: 15px;
+  color: black;
+  border-bottom: 3px solid #a89c8b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+}
+
+/* Align the logo on the left and title on the right */
+.header-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.vetra-logo {
+  width: 85px; /* Slightly larger for better visibility */
+  height: auto;
+}
+
+.vetra-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: center;
+}
+
+.vetra-text h1 {
+  margin: 0;
+  font-size: 3rem; /* Increased for better proportion */
+}
+
+.vetra-text h2 {
+  margin: 5px 0 0 0;
+  font-size: 1.7rem;
+}
+
+/* Greeting below the header with proper spacing */
+.greeting {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 18px;
+}
+
+/* BUTTONS SECTION */
+.buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 20px;
+  max-width: 800px;
+}
+
+.button {
+  background-color: #c7b299;
+  color: black;
+  padding: 16px 25px; /* Increased padding for bigger buttons */
+  border-radius: 25px;
+  border: none;
+  font-size: 1.2rem; /* Larger text for better readability */
+  cursor: pointer;
+  transition: background 0.3s ease;
+  flex: 1 1 200px;
+  min-width: 180px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.button:hover {
+  background-color: #b39a7f;
+}
+
+/* FOOTER */
+.footer {
+  width: 100%;
+  height: 10vh; /* Expanded for better balance */
+  background-color: #d4c3af;
+  color: black;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 3px solid #a89c8b;
+}

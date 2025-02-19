@@ -1,3 +1,5 @@
+import '../styles/ErrorPage.css';
+
 const ErrorPage = () => {
   return (
     <section>

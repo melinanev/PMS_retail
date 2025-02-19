@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import '../styles/Inventory.css';
+
 
 type InventoryItem = {
     sku: string;

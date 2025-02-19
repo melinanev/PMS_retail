@@ -1,25 +1,40 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import auth from '../utils/auth';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import auth from "../utils/auth";
+import "../styles/NavBar.css";
 
 const Navbar = () => {
   const [loginCheck, setLoginCheck] = useState(false);
 
-  const checkLogin = () => {
-    if (auth.loggedIn()) {
-      setLoginCheck(true);
-    }
-  };
-
   useEffect(() => {
-    console.log(loginCheck);
-    checkLogin();
-  }, [loginCheck]);
+    setLoginCheck(auth.loggedIn());
+  }, []);
 
   return (
-    <div className='display-flex justify-space-between align-center py-2 px-5 mint-green'>
-      <h1>VECTRA</h1>
-     </div>
-  )
-}
-export default Navbar
+    <nav className="navbar">
+
+      {/* Navigation Links */}
+      <div className="navbar-links">
+        <Link to="/">Home</Link>
+        <Link to="/inventory">Inventory</Link>
+        <Link to="/reports">Reports</Link>
+        <Link to="/settings">Settings</Link>
+      </div>
+
+      {/* Authentication Options */}
+      <div className="navbar-auth">
+        {loginCheck ? (
+          <button className="logout-button" onClick={() => auth.logout()}>
+            Log Out
+          </button>
+        ) : (
+          <Link to="/login" className="login-button">
+            Log In
+          </Link>
+        )}
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
