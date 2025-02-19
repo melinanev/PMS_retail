@@ -1,0 +1,10 @@
+.footer {
+  width: 100%;
+  background-color: var(--secondary-bg); /* ✅ Uses global footer color */
+  color: var(--text-color);
+  text-align: center;
+  padding: 20px;
+  border-top: 3px solid #a89c8b;
+  position: relative;
+  flex-shrink: 0;
+}

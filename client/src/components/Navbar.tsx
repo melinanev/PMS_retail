@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import auth from "../utils/auth";
-import "../styles/NavBar.css";
+import "../styles/Navbar.css";
 
 const Navbar = () => {
   const [loginCheck, setLoginCheck] = useState(false);
@@ -12,24 +12,29 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-
-      {/* Navigation Links */}
-      <div className="navbar-links">
-        <Link to="/">Home</Link>
-        <Link to="/inventory">Inventory</Link>
-        <Link to="/reports">Reports</Link>
-        <Link to="/settings">Settings</Link>
+      <div className="navbar-buttons">
+        <Link to="/">
+          <button className="nav-button">Home</button>
+        </Link>
+        <Link to="/inventory">
+          <button className="nav-button">Inventory</button>
+        </Link>
+        <Link to="/reports">
+          <button className="nav-button">Reports</button>
+        </Link>
+        <Link to="/settings">
+          <button className="nav-button">Settings</button>
+        </Link>
       </div>
 
-      {/* Authentication Options */}
       <div className="navbar-auth">
         {loginCheck ? (
           <button className="logout-button" onClick={() => auth.logout()}>
             Log Out
           </button>
         ) : (
-          <Link to="/login" className="login-button">
-            Log In
+          <Link to="/login">
+            <button className="login-button">Log In</button>
           </Link>
         )}
       </div>
