@@ -1,8 +1,8 @@
 import { Product } from '../models/product.js'; 
-import  sequelize  from '../config/connection.js';
 
-const seedProducts = async () => {
-  // Dummy data, we can add as many as we would like to. 
+
+export const seedProducts = async () => {
+  // Dummy data
   const products = [    
     // Accessories
     { sku: 'ACC-001', name: 'Dog Collar', description: 'Adjustable dog collar with buckle.', quantity: 100, price: 15.99, category: 'Accessories' },
@@ -59,29 +59,25 @@ const seedProducts = async () => {
     { sku: 'MED-004', name: 'Joint Supplements', description: 'Supplements for joint health.', quantity: 90, price: 34.99, category: 'Medication' },
     { sku: 'MED-005', name: 'Ear Drops', description: 'Ear infection treatment for pets.', quantity: 100, price: 22.99, category: 'Medication' },
     { sku: 'MED-006', name: 'Allergy Relief', description: 'Oral medication for pet allergies.', quantity: 85, price: 29.99, category: 'Medication' },
-    { sku: 'MED-007', name: 'Eye Drops', description: 'Soothing eye drops for pets.', quantity: 75, price: 17.99, category: 'Medication' },
-    { sku: 'MED-008', name: 'Digestive Aid', description: 'Probiotic supplement for pet digestion.', quantity: 65, price: 25.99, category: 'Medication' },
-    { sku: 'MED-009', name: 'Pain Reliever', description: 'Pain relief tablets for pets.', quantity: 55, price: 19.99, category: 'Medication' },
-    { sku: 'MED-010', name: 'Skin Treatment', description: 'Ointment for skin conditions in pets.', quantity: 50, price: 21.99, category: 'Medication' },
+    { sku: 'MED-007', name: 'Eye Drops', description: 'Soothing eye drops for pets.', quantity: 75, price: 18.99, category: 'Medication' },
+    { sku: 'MED-008', name: 'Pet Shampoo', description: 'Gentle shampoo for pets.', quantity: 50, price: 9.99, category: 'Medication' },
+    { sku: 'MED-009', name: 'Wound Care Spray', description: 'Spray for treating pet wounds.', quantity: 60, price: 12.99, category: 'Medication' },
+    { sku: 'MED-010', name: 'Ear Infection Drops', description: 'Ear treatment for pets with infections.', quantity: 40, price: 17.99, category: 'Medication' },
   ];
 
   try {
-    // This loops over our database and awaits for newly created products
     for (const product of products) {
+      // Ensure product details are valid
+      if (!product.sku || !product.name || !product.price || !product.quantity) {
+        console.error(`Skipping invalid product: ${JSON.stringify(product)}`);
+        continue;
+      }
+
       await Product.create(product);
     }
 
+    console.log('Products seeded successfully');
   } catch (error) {
-    console.error('Error seeding product data:', error);
+    console.error('Error seeding products:', error);
   }
 };
-
-// This runs the seeding function and drops and recreates the table with new products etc.
-const seed = async () => {
-  await sequelize.sync({ force: true }); 
-  await seedProducts(); 
-};
-
-seed().then(() => {
-  process.exit();
-});

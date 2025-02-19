@@ -66,11 +66,3 @@ export const authorizeManager = (
   return; // Explicitly return to satisfy TypeScript
 };
 
-// Middleware to check if the user is a manager
-export const isManager = (req: Request, res: Response, next: NextFunction) => {
-  if (req.user?.role !== 'manager') {
-    return res.status(403).json({ message: 'Only managers have access' });
-  }
-  next();
-  return; // Explicitly return to satisfy TypeScript
-};

@@ -1,20 +1,23 @@
 import { useEffect, useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [currentTime, setCurrentTime] = useState<string>('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const updateTime = () => {
       setCurrentTime(`Hello, Employee! The current local time is: ${new Date().toLocaleString()}`);
     };
     updateTime();
-    const interval = setInterval(updateTime, 60000); // Update every minute
-    return () => clearInterval(interval); // Cleanup interval
+    const interval = setInterval(updateTime, 60000); 
+    return () => clearInterval(interval); 
   }, []);
 
-  const Button = ({ label }: { label: string }) => (
-    <button className="btn btn-primary mx-1 my-1">{label}</button>
+  const Button = ({ label, onClick }: { label: string; onClick?: () => void }) => (
+    <button className="btn btn-primary mx-1 my-1" onClick={onClick}>
+      {label}
+    </button>
   );
 
   return (
@@ -38,7 +41,7 @@ const Home = () => {
         <div className="flex-row justify-center">
           <Button label="Time Clock" />
           <Button label="Payroll" />
-          <Button label="Inventory" />
+          <Button label="Inventory" onClick={() => navigate('/inventory')} />
           <Button label="Customers" />
         </div>
 

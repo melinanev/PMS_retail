@@ -21,6 +21,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
     "@types/pg": "^8.11.11",
     "axios": "^1.7.9",
     "bcrypt": "^5.1.1",

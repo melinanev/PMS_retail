@@ -1,4 +1,7 @@
+// seedAll.js
+
 import { seedUsers } from './user-seeds.js';
+import { seedProducts } from './products-seeds.js'; // Import product seeding function
 import sequelize from '../config/connection.js';
 
 const seedAll = async (): Promise<void> => {
@@ -9,6 +12,9 @@ const seedAll = async (): Promise<void> => {
     await seedUsers();
     console.log('\n----- USERS SEEDED -----\n');
 
+    await seedProducts(); // Call the seedProducts function here
+    console.log('\n----- PRODUCTS SEEDED -----\n');
+
     process.exit(0);
   } catch (error) {
     console.error('Error seeding database:', error);
@@ -17,3 +23,4 @@ const seedAll = async (): Promise<void> => {
 };
 
 seedAll();
+
