@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
-import sequelize from '../config/connection';
-import { User } from './user';
+import sequelize from '../config/connection.js';
+import { User } from './user.js';
 
 export class workSession extends Model {
     public id!: number;

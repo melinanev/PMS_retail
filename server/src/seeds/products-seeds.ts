@@ -1,5 +1,5 @@
-import { Product } from '../models/product'; 
-import  sequelize  from '../config/connection';
+import { Product } from '../models/product.js'; 
+import  sequelize  from '../config/connection.js';
 
 const seedProducts = async () => {
   // Dummy data, we can add as many as we would like to. 

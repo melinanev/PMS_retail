@@ -2,7 +2,7 @@ import type { UserLogin } from '../interfaces/UserLogin';
 
 const login = async (userInfo: UserLogin) => {
   try {
-    const response = await fetch('/auth-routes/login', {
+    const response = await fetch('/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

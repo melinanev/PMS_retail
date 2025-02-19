@@ -1,6 +1,6 @@
 import express from 'express';
-import { Product } from '../../models/product';
-import { authenticateToken, authorizeManager } from '../../middleware/auth';
+import { Product } from '../../models/product.js';
+import { authenticateToken, authorizeManager } from '../../middleware/auth.js';
 import axios from 'axios';
 
 const router = express.Router();
@@ -41,9 +41,9 @@ router.post('/', authenticateToken, async (req, res) => {
 
   try {
     const newProduct = await Product.create({ name, description, quantity, price });
-    res.status(201).json(newProduct);
+   return res.status(201).json(newProduct);
   } catch (error) {
-    res.status(400).json({ message: 'Error creating product' });
+   return res.status(400).json({ message: 'Error creating product' });
   }
 });
 
@@ -62,14 +62,14 @@ router.put('/:id', authenticateToken, async (req, res) => {
     if (product) {
       product.quantity = quantity;
       await product.save();
-      res.json(product);
+     return res.json(product);
     } else {
-      res.status(404).json({ message: 'Product not found' });
+     return res.status(404).json({ message: 'Product not found' });
     }
   } catch (error) {
-    res.status(400).json({ message: 'Error updating product' });
+   return res.status(400).json({ message: 'Error updating product' });
   }
-
+})
   router.post('/order', authenticateToken, authorizeManager, async (req, res) => {
     const { productID, quantity } = req.body;
 
@@ -83,13 +83,13 @@ router.put('/:id', authenticateToken, async (req, res) => {
         date: new Date().toISOString(),
         products: [{ productID, quantity }],
       });
-      res.status(201).json({ message: 'Order placed successfully', order: response.data });
+     return res.status(201).json({ message: 'Order placed successfully', order: response.data });
     } catch (error) {
-      res.status(500).json({ message: 'Failed to place order' });
+     return res.status(500).json({ message: 'Failed to place order' });
     }
   })
 
 
-});
+
 
 export { router as inventoryRouter };

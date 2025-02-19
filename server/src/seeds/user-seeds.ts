@@ -7,8 +7,8 @@ export const seedUsers = async () => {
       { username: 'SunnyScribe', email: 'sunny@scribe.com', password: 'password', role: 'employee' },
       { username: 'RadiantComet', email: 'radiant@comet.com', password: 'password', role: 'employee' },
       { username: 'jacob', email: 'example@email.com', password: 'password', role: 'employee' },
-      { username: 'josh', email: 'example@email.com', password: 'password', role: 'manager' },
-      { username: 'melina', email: 'example@email.com', password: 'password', role: 'manager' }
+      { username: 'josh', email: 'example@email1.com', password: 'password', role: 'manager' },
+      { username: 'melina', email: 'example@email2.com', password: 'password', role: 'manager' }
     ],
     { individualHooks: true }
   );

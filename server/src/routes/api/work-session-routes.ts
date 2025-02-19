@@ -1,5 +1,5 @@
 import express from 'express';
-import { workSession } from '../../models/work-session';
+import { workSession } from '../../models/work-session.js';
 import { authenticateToken } from '../../middleware/auth.js';
 import { JwtPayload } from 'jsonwebtoken';
 
@@ -19,9 +19,9 @@ router.post('/clock-in', authenticateToken, async (req, res) => {
     }
 
     const newSession = await workSession.create({ employee_id: userId, clock_in: new Date() });
-    res.status(201).json(newSession);
+   return res.status(201).json(newSession);
   } catch (error) {
-    res.status(500).json({ message: 'Error clocking in' });
+   return res.status(500).json({ message: 'Error clocking in' });
   }
 });
 
@@ -41,9 +41,9 @@ router.post('/clock-out', authenticateToken, async (req, res) => {
     session.clock_out = new Date();
     await session.save();
 
-    res.json({ message: 'Clocked out successfully', session });
+   return res.json({ message: 'Clocked out successfully', session });
   } catch (error) {
-    res.status(500).json({ message: 'Error clocking out' });
+   return res.status(500).json({ message: 'Error clocking out' });
   }
 });
 

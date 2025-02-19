@@ -56,9 +56,9 @@ router.post('/', async (req: Request, res: Response) => {
   try {
     const hashedPassword = await bcrypt.hash(password, 10); 
     const newUser = await User.create({ username, email, password: hashedPassword, role });
-    res.status(201).json(newUser);
+   return res.status(201).json(newUser);
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+   return res.status(400).json({ message: error.message });
   }
 });
 
@@ -77,12 +77,12 @@ router.put('/:id', async (req: Request, res: Response) => {
       user.username = username;
       user.password = await bcrypt.hash(password, 10); // Hash the new password
       await user.save();
-      res.json(user);
+    return res.json(user);
     } else {
-      res.status(404).json({ message: 'User not found' });
+     return res.status(404).json({ message: 'User not found' });
     }
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+   return res.status(400).json({ message: error.message });
   }
 });
 
