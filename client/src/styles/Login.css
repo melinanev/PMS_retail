@@ -1,35 +1,69 @@
-/* Apply Global Theme */
-.login-container {
+/* Ensure Full Page Height */
+html {
+  height: 100%;
+}
+
+/* Center Login Box */
+.login-main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+}
+
+/* Login Heading */
+.login-main h2 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form Group - Spacing Between Inputs */
+.form-group {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  background-color: var(--primary-bg); /* ✅ Uses global background */
-  box-shadow: 0 8px 20px var(--shadow-color); /* ✅ Uses global shadow */
+  margin-bottom: 20px; /* ✅ Increased spacing between Username & Password */
 }
 
-/* Login Box */
-.login-box {
-  background: white;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 6px 18px var(--shadow-color);
-  width: 420px;
-  text-align: center;
-}
-
-/* Buttons */
-.sign-in-btn {
-  background-color: var(--primary-btn);
-  color: white;
-  border: none;
-  padding: 14px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  border-radius: 5px;
+/* Input Fields */
+.form-group input {
   width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background: #fff;
+  color: #000;
+  outline: none;
+}
+
+/* Labels */
+.form-group label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #fff;
+}
+
+/* Center the Sign In Button */
+.sign-in-btn {
+  display: block;
+  width: 100%; /* ✅ Makes the button full width */
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #03e9f4;
+  color: white;
+  cursor: pointer;
   transition: background 0.3s ease-in-out;
+  text-align: center; /* ✅ Ensures text is centered */
 }
 
 .sign-in-btn:hover {
-  background-color: var(--primary-btn-hover);
+  background-color: #0295a8;
 }

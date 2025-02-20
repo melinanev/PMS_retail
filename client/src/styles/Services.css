@@ -1,0 +1,12 @@
+/* Services.css */
+
+/* Container styling */
+.services-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center; /* ✅ Ensures text is centered */
+  height: 100%;
+  }

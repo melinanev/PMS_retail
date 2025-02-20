@@ -1,0 +1,45 @@
+/* Fix container layout */
+.timeclock-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 70%
+  }
+
+  /* Improve Clock Display */
+  .clock-display {
+    font-size: 3rem;
+    font-weight: bold;
+    background-color: var(--secondary-bg);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    text-align: center; /* ✅ Ensures text stays centered */
+  }
+  
+  /* Button Container */
+  .timeclock-buttons {
+    display: flex;
+    justify-content: center; /* ✅ Centers buttons horizontally */
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  /* Fix button spacing */
+  .timeclock-button {
+    background-color: var(--primary-btn);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .timeclock-button:hover {
+    background-color: var(--primary-btn-hover);
+  }
+  

@@ -19,14 +19,16 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-main">
-        {/* ✅ Logo and Title (Side by Side) */}
+        {/* ✅ Logo, Title, and Paw Icons */}
         <div className="logo-title-container">
+          <span className="paw-icon">🐾</span> {/* ✅ Left Paw Icon */}
           <img src={logo} alt="Vetra Logo" className="vetra-logo" />
           <h1>VETRA</h1>
+          <span className="paw-icon">🐾</span> {/* ✅ Right Paw Icon */}
         </div>
 
-        {/* ✅ Slogan Moved Below */}
-        <h2 className="header-slogan">Your Veterinary & Retail Assistant</h2>        
+        {/* ✅ Slogan Below */}
+        <h2 className="header-slogan">Your Veterinary Retail Assistant</h2>
       </div>
 
       {/* ✅ Time Greeting */}

@@ -1,0 +1,23 @@
+/* PayRoll.css */
+
+/* Container styling */
+.payroll-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 90%
+  }
+  
+  /* Main section */
+  .payroll-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    width: 100%;
+    padding: 20px;
+  }
+  

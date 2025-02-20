@@ -1,5 +1,5 @@
 import { useState, type FormEvent, type ChangeEvent } from "react";
-import Header from "../components/Header"; // ✅ Include full header with time
+import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Auth from "../utils/auth";
 import { login } from "../api/authAPI";
@@ -32,7 +32,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <Header /> {/* ✅ Full header is included with time */}
+      <Header /> 
 
       {/* LOGIN FORM */}
       <main className="login-main">
