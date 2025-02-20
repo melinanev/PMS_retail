@@ -1,9 +1,10 @@
-/* Ensure Full Page Height */
-html {
+/* 🌍 Ensure Full Page Uses Global Styles */
+html, body {
   height: 100%;
+  background-color: var(--primary-bg); /* ✅ Use global background */
 }
 
-/* Center Login Box */
+/* Center Login Box & Apply Global Theme */
 .login-main {
   position: absolute;
   top: 50%;
@@ -11,14 +12,15 @@ html {
   width: 400px;
   padding: 40px;
   transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.5);
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  background: var(--secondary-bg);
+  box-shadow: 0 4px 10px var(--shadow-color);
   border-radius: 10px;
+  text-align: center;
 }
 
 /* Login Heading */
 .login-main h2 {
-  color: #fff;
+  color: var(--text-color);
   text-align: center;
   margin-bottom: 20px;
 }
@@ -27,7 +29,7 @@ html {
 .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px; /* ✅ Increased spacing between Username & Password */
+  margin-bottom: 20px;
 }
 
 /* Input Fields */
@@ -46,24 +48,24 @@ html {
 .form-group label {
   margin-bottom: 5px;
   font-size: 14px;
-  color: #fff;
+  color: var(--text-color);
 }
 
-/* Center the Sign In Button */
+/* Center the Sign-In Button & Apply Global Theme */
 .sign-in-btn {
   display: block;
-  width: 100%; /* ✅ Makes the button full width */
+  width: 100%;
   padding: 12px;
   font-size: 16px;
   border: none;
   border-radius: 5px;
-  background-color: #03e9f4;
+  background-color: var(--primary-btn);
   color: white;
   cursor: pointer;
   transition: background 0.3s ease-in-out;
-  text-align: center; /* ✅ Ensures text is centered */
+  text-align: center;
 }
 
 .sign-in-btn:hover {
-  background-color: #0295a8;
+  background-color: var(--primary-btn-hover);
 }
