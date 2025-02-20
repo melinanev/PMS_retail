@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-between;
   height: calc(90vh - 7vh); /* Reduced main area height */
-  background-color: #e6dbcf; /* Beige background */
+  background-color: var(--primary-bg); /* ✅ Now using the global theme */
   padding: 0;
   overflow: hidden;
 }
@@ -16,7 +16,7 @@
 .header {
   width: 100%;
   height: 20vh; /* Slightly increased to balance space */
-  background-color: #d4c3af;
+  background-color: var(--secondary-bg);
   padding: 15px;
   color: black;
   border-bottom: 3px solid #a89c8b;
@@ -36,11 +36,11 @@
   gap: 20px;
 }
 
-
-/*.vetra-logo {
+.vetra-logo {
   width: 70px;
   height: auto;
-}*/
+  margin-top: 10px;
+}
 
 .vetra-text {
   display: center;
@@ -67,6 +67,14 @@
 }
 
 /* BUTTONS SECTION */
+.home-container main {
+  flex-grow: 1; /* ✅ Ensures buttons are centered properly */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
 .buttons-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -102,7 +110,7 @@
 .footer {
   width: 100%;
   height: 12vh; /* Increased for better balance */
-  background-color: #d4c3af;
+  background-color: var(--secondary-bg);
   color: black;
   text-align: center;
   display: flex;
@@ -110,6 +118,3 @@
   justify-content: center;
   border-top: 3px solid #a89c8b;
 }
-
-
-

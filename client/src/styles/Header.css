@@ -36,6 +36,11 @@
   padding: 0;
   margin: 0;
 }
+/* ✅ Paw Icon Styling */
+.paw-icon {
+  font-size: 30px; /* ✅ Makes the paw bigger */
+  margin: 0 15px; /* ✅ Adds space between paw and logo/title */
+}
 
 /* ✅ Move Slogan Below Logo + Title */
 .header-slogan {

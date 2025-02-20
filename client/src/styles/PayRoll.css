@@ -1,0 +1,36 @@
+/* PayRoll.css */
+
+/* Container styling */
+.payroll-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    background-color: var(--primary-bg); /* Uses global background */
+  }
+  
+  /* Header spacing */
+  .payroll-header {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Main section */
+  .payroll-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  /* Info text */
+  .payroll-main p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-top: 10px;
+  }
+  

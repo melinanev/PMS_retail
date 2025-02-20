@@ -1,0 +1,62 @@
+/* TimeClock.css */
+
+/* Container styling */
+.timeclock-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    background-color: var(--primary-bg); /* Uses global background */
+  }
+  
+  /* Header spacing */
+  .timeclock-header {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Main section */
+  .timeclock-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  /* Clock display */
+  .clock-display {
+    font-size: 3rem;
+    font-weight: bold;
+    background-color: var(--secondary-bg);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--shadow-color);
+  }
+  
+  /* Button container */
+  .timeclock-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+  }
+  
+  /* Clock in / Clock out buttons */
+  .timeclock-button {
+    background-color: var(--primary-btn);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .timeclock-button:hover {
+    background-color: var(--primary-btn-hover);
+  }
+  

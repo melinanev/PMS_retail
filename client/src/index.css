@@ -130,12 +130,4 @@ a:hover {
   padding: 10px 50px;
 }
 
-/* 🌍 Footer Fix (Prevents Floating) */
-.footer {
-  width: 100%;
-  text-align: center;
-  padding: 20px;
-  background-color: var(--secondary-bg);
-  position: relative; /* ✅ Ensures it stays in document flow */
-  flex-shrink: 0; /* ✅ Prevents collapsing */
-}
+

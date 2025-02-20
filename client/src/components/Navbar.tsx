@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import auth from "../utils/auth";
 import "../styles/Navbar.css";
 
 const Navbar = () => {
   const [loginCheck, setLoginCheck] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoginCheck(auth.loggedIn());
@@ -13,18 +14,10 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-buttons">
-        <Link to="/">
-          <button className="nav-button">Home</button>
-        </Link>
-        <Link to="/inventory">
-          <button className="nav-button">Inventory</button>
-        </Link>
-        <Link to="/reports">
-          <button className="nav-button">Reports</button>
-        </Link>
-        <Link to="/settings">
-          <button className="nav-button">Settings</button>
-        </Link>
+        <button className="nav-button" onClick={() => navigate("/")}>Home</button>
+        <button className="nav-button" onClick={() => navigate("/app/inventory")}>Inventory</button>
+        <button className="nav-button" onClick={() => navigate("/app/reports")}>Reports</button>
+        <button className="nav-button" onClick={() => navigate("/settings")}>Settings</button>
       </div>
 
       <div className="navbar-auth">
@@ -33,9 +26,7 @@ const Navbar = () => {
             Log Out
           </button>
         ) : (
-          <Link to="/login">
-            <button className="login-button">Log In</button>
-          </Link>
+          <button className="login-button" onClick={() => navigate("/login")}>Log In</button>
         )}
       </div>
     </nav>
