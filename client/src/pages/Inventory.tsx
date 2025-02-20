@@ -28,6 +28,23 @@ const Inventory: React.FC = () => {
         }
     }, [alertMessage]);
 
+    useEffect(() => {
+        const fetchInventory = async () => {
+            try {
+                const response = await fetch('/api/inventory');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setInventory(data);
+            } catch (error) {
+                console.error('Error fetching inventory:', error);
+            }
+        };
+
+        fetchInventory();
+    }, []);
+
     const sortTable = (key: keyof InventoryItem) => { 
         const sortedInventory = [...inventory].sort((a, b) => 
             (a[key] as any) < (b[key] as any) ? -1 : 1
