@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../styles/Header.css";
+import logo from "../assets/images/Vetra-logo.png"; // ✅ Import the logo
 
 const Header = () => {
   const [currentTime, setCurrentTime] = useState<string>("");
@@ -18,10 +19,18 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-main">
-        <h1>VETRA</h1>
-        <h2>Your Veterinary & Retail Assistant</h2>
+        {/* ✅ Logo and Title (Side by Side) */}
+        <div className="logo-title-container">
+          <img src={logo} alt="Vetra Logo" className="vetra-logo" />
+          <h1>VETRA</h1>
+        </div>
+
+        {/* ✅ Slogan Moved Below */}
+        <h2 className="header-slogan">Your Veterinary & Retail Assistant</h2>        
       </div>
-      <p className="header-text">{currentTime}</p> {/* Always display the greeting */}
+
+      {/* ✅ Time Greeting */}
+      <p className="header-text">{currentTime}</p>
     </header>
   );
 };

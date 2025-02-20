@@ -1,32 +1,60 @@
+/* 🌍 Header Styles */
 .header {
   width: 100%;
-  background-color: var(--secondary-bg); /* ✅ Uses global header color */
+  background-color: var(--secondary-bg);
   padding: 20px;
   color: var(--text-color);
   text-align: center;
   border-bottom: 3px solid #a89c8b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .header-main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 1px; /* ✅ Ensures space below the header */
 }
 
-.header-main h1 {
-  font-size: 2.5rem;
+/* ✅ Flexbox for Logo + Title */
+.logo-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  }
+
+/* ✅ Logo Styling */
+.vetra-logo {
+  width: 60px;
+  height: auto;
+  padding: 0;
   margin: 0;
 }
 
-.header-main h2 {
+/* ✅ Move Slogan Below Logo + Title */
+.header-slogan {
+  display: block; /* ✅ Forces a new line */
+  width: 100%;
+  text-align: center;
   font-size: 1.5rem;
-  margin-top: 5px;
-}
+  }
 
-/* Greeting / Additional Text */
+/* ✅ Styles for the "Hello, Employee!" Text */
 .header-text {
-  font-size: 1.2rem;
+  font-size: 1.2rem; /* Adjust if needed */
   font-weight: bold;
   text-align: center;
-  margin-top: 12px;
+  color: var(--text-color); /* ✅ Matches global text color */
+}
+
+/* ✅ Emoji Styling */
+.emoji {
+  font-size: 18px;
+  margin: 0 5px;
 }
