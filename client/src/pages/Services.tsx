@@ -1,16 +1,12 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import "../styles/Services.css"; // ✅ Ensure this file exists
+import "../styles/Services.css"; 
 
 const Services = () => {
   return (
-    <div className="services-container">
-      <Header />
+    <div className="services-container">     
       <main className="services-main">
         <h1>Services</h1>
         <p>Manage the services offered by the store.</p>
       </main>
-      <Footer />
     </div>
   );
 };

@@ -1,19 +1,17 @@
 /* 🌍 Global Color Theme */
 :root {
-  --primary-bg: #e0dac5; /* ✅ Global background */
-  --secondary-bg: #d4c3af; /* ✅ Header & footer background */
-  --text-color: #1a1a1a; /* ✅ Default text color */
-  --primary-btn: #2d3e50; /* ✅ Primary button color */
-  --primary-btn-hover: #57779a; /* ✅ Primary button hover */
-  --danger-btn: #e64c66; /* ✅ Danger button color */
-  --danger-btn-hover: #c43b52; /* ✅ Danger button hover */
-  --shadow-color: rgba(0, 0, 0, 0.4); /* ✅ Standard shadow effect */
+  --primary-bg: #e0dac5;
+  --secondary-bg: #d4c3af;
+  --text-color: #1a1a1a;
+  --primary-btn: #2d3e50;
+  --primary-btn-hover: #57779a;
+  --danger-btn: #e64c66;
+  --danger-btn-hover: #c43b52;
+  --shadow-color: rgba(0, 0, 0, 0.4);
 }
 
-/* Normalize.css - Reset Styles */
 html, body {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -22,95 +20,7 @@ html, body {
   background-color: var(--primary-bg);
 }
 
-/* Box Sizing Reset */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-/* Basic Element Styles */
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  line-height: 1.25;
-}
-
-h1 { font-size: 2.25rem; }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.75rem; }
-h4 { font-size: 1.5rem; }
-h5 { font-size: 1.25rem; }
-h6 { font-size: 1rem; }
-
-p {
-  font-size: 1.1rem;
-  margin: 0 0 1rem;
-  line-height: 1.5;
-}
-
-/* 🌍 Links */
-a {
-  color: #1b89bc;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #065b83;
-  text-decoration: underline;
-}
-
-/* 🌍 Utility Classes (Scoped to Avoid Conflicts) */
-.flex-row { display: flex; flex-direction: row; flex-wrap: wrap; }
-.flex-column { display: flex; flex-direction: column; flex-wrap: wrap; }
-.justify-center { justify-content: center; }
-.align-center { align-items: center; }
-
-/* 🌍 Scoped Utility for Layout Containers */
-.layout-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* ✅ Ensures full page height */
-}
-
-/* 🌍 Ensure the Main Content Fills the Space */
-.main-content {
-  flex-grow: 1; /* ✅ Pushes footer to the bottom */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  min-height: calc(100vh - 140px)
-}
-
-/* 🌍 Global Button Styles */
-.btn {
-  text-align: center;
-  display: inline-block;
-  padding: 12px 20px;
-  margin: 0;
-  text-decoration: none;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
-}
-
-.btn:hover { background-color: #cecece; }
-
-.btn-primary { background-color: var(--primary-btn); color: white; }
-.btn-primary:hover { background-color: var(--primary-btn-hover); }
-
-.btn-danger { background-color: var(--danger-btn); color: white; }
-.btn-danger:hover { background-color: var(--danger-btn-hover); }
-
-/* 🌍 Page Layout Helpers */
-.container { width: 85%; max-width: 1200px; margin-left: auto; margin-right: auto; }
-
-.row { display: flex; flex-wrap: wrap; flex-direction: row; }
-
-.col-6 { flex: 0 0 50%; max-width: 50%; }
-.col-12 { flex: 0 0 100%; max-width: 100%; }
-
-/* 🌍 Navbar Fixes */
+/* ✅ Navbar Fixes */
 .navbar {
   display: flex;
   justify-content: center;
@@ -129,5 +39,8 @@ a:hover {
   color: white;
   padding: 10px 50px;
 }
+
+
+
 
 

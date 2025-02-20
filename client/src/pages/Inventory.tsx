@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import '../styles/Inventory.css';
-import Header from "../components/Header";  // ✅ Added Header import
-import Footer from "../components/Footer";  // ✅ Added Footer import
 
 type InventoryItem = {
     sku: string;
@@ -54,7 +52,6 @@ const Inventory: React.FC = () => {
 
     return (
         <div className="layout-container">
-            <Header />  {/* ✅ Header included at the top */}
             <main className="main-content">
                 <div className="inventory">
                     <h1>Inventory Management</h1>
@@ -115,7 +112,6 @@ const Inventory: React.FC = () => {
                     </table>
                 </div>
             </main>
-            <Footer />  {/* ✅ Footer included at the bottom */}
         </div>
     );
 };

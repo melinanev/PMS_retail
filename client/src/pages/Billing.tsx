@@ -1,16 +1,12 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import "../styles/Billing.css"; // ✅ Ensure this file exists
+import "../styles/Billing.css"; 
 
 const Billing = () => {
   return (
-    <div className="billing-container">
-      <Header />
+    <div className="billing-container">     
       <main className="billing-main">
         <h1>Billing</h1>
         <p>Manage customer invoices and payments.</p>
-      </main>
-      <Footer />
+      </main>    
     </div>
   );
 };

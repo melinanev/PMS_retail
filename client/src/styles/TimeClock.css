@@ -1,33 +1,14 @@
-/* TimeClock.css */
-
-/* Container styling */
+/* Fix container layout */
 .timeclock-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    height: 100vh;
-    background-color: var(--primary-bg); /* Uses global background */
-  }
-  
-  /* Header spacing */
-  .timeclock-header {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  /* Main section */
-  .timeclock-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    flex-grow: 1;
     width: 100%;
-    padding: 20px;
+    height: 70%
   }
-  
-  /* Clock display */
+
+  /* Improve Clock Display */
   .clock-display {
     font-size: 3rem;
     font-weight: bold;
@@ -35,16 +16,18 @@
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 10px var(--shadow-color);
+    text-align: center; /* ✅ Ensures text stays centered */
   }
   
-  /* Button container */
+  /* Button Container */
   .timeclock-buttons {
-    margin-top: 20px;
     display: flex;
+    justify-content: center; /* ✅ Centers buttons horizontally */
     gap: 15px;
+    margin-top: 20px;
   }
   
-  /* Clock in / Clock out buttons */
+  /* Fix button spacing */
   .timeclock-button {
     background-color: var(--primary-btn);
     color: white;

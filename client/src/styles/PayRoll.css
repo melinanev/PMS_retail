@@ -5,15 +5,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    height: 100vh;
-    background-color: var(--primary-bg); /* Uses global background */
-  }
-  
-  /* Header spacing */
-  .payroll-header {
-    text-align: center;
-    margin-top: 20px;
+    justify-content: center;
+    width: 100%;
+    height: 90%
   }
   
   /* Main section */
@@ -25,12 +19,5 @@
     flex-grow: 1;
     width: 100%;
     padding: 20px;
-  }
-  
-  /* Info text */
-  .payroll-main p {
-    font-size: 1.2rem;
-    color: var(--text-color);
-    margin-top: 10px;
   }
   
