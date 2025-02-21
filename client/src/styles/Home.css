@@ -1,0 +1,51 @@
+/* Home.css */
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: calc(90vh - 7vh);
+    background-color: var(--primary-bg);
+    padding: 0;
+    overflow: hidden;
+  }
+  /* BUTTONS SECTION */
+  .home-container main {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .buttons-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 15px;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    justify-content: center;
+  }
+  
+  .button {
+    width: 100%;
+    padding: 20px;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    background-color: #c7b299;
+    border: none;
+    transition: background 0.3s;
+    text-align: center;
+  }
+  
+  .button:last-child {
+    grid-column: span 2;
+    justify-self: center;
+  }
+  
+  .button:hover {
+    background-color: #b39a7f;
+  }

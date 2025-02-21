@@ -1,0 +1,21 @@
+/* Inventory.css */
+
+.inventory {
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  .inventory table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .inventory th, .inventory td {
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .inventory th {
+    background-color: #2d3e50;
+    color: white;
+  }

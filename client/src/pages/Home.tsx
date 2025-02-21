@@ -1,67 +1,41 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import "../styles/Home.css";
+import Navbar from "../components/Navbar";
 
 const Home = () => {
-  const [currentTime, setCurrentTime] = useState<string>('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const updateTime = () => {
-      setCurrentTime(`Hello, Employee! The current local time is: ${new Date().toLocaleString()}`);
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 60000); 
-    return () => clearInterval(interval); 
-  }, []);
-
-  const Button = ({ label, onClick }: { label: string; onClick?: () => void }) => (
-    <button className="btn btn-primary mx-1 my-1" onClick={onClick}>
-      {label}
-    </button>
-  );
-
   return (
-    <div className="mint-green text-center min-100-vh">
-      <header className="header bg-info py-3">
-        🐾 🌿
-        <button id="home-button" className="btn btn-light">
-          <img src="../shared/images/home.png" alt="Home Button" title="Home Page Button" />
-        </button>
-        🐾 🌿
-        <div className="header-top my-2">
-          <span className="text-dark">{currentTime}</span>
-        </div>
-        <div className="header-main">
-          <h1 className="text-white">VETRA</h1>
-          <h2 id="page-title" className="text-white">Home Page</h2>
-        </div>
-      </header>
+    <div className="home-container">
+      <Navbar />
+      <Header />
 
-      <main className="p-4">
-        <div className="flex-row justify-center">
-          <Button label="Time Clock" />
-          <Button label="Payroll" />
-          <Button label="Inventory" onClick={() => navigate('/inventory')} />
-          <Button label="Customers" />
-        </div>
-
-        <div className="flex-row justify-center mt-3">
-          <Button label="Reports" />
-          <Button label="Settings" />
-          <Button label="Log Out" />
-          <Button label="Billing" />
-          <Button label="PLACEHOLDER" />
+      {/* BUTTON NAVIGATION */}
+      <main>
+        <div className="buttons-container">
+          <button className="button" onClick={() => navigate("/app/time-clock")}>Time Clock</button>
+          <button className="button" onClick={() => navigate("/app/payroll")}>Payroll</button>
+          <button className="button" onClick={() => navigate("/app/customers")}>Customers</button>
+          <button className="button" onClick={() => navigate("/app/suppliers")}>Suppliers</button>
+          <button className="button" onClick={() => navigate("/app/services")}>Services</button>
+          <button className="button" onClick={() => navigate("/app/billing")}>Billing</button>
+          <button className="button">PLACEHOLDER</button>
         </div>
       </main>
 
-      <footer className="bg-dark text-white py-3">
-        <img src="../shared/images/logo v10000.jpg" alt="Cipher Claw 13 Logo" className="mb-2" />
-        <br />
-        <a href="#" className="text-link">Contact Me</a>
-        <p>Made with <span style={{ color: 'black' }}>&hearts;</span> by Auntie Beans</p>
-      </footer>
+      <Footer />
     </div>
   );
 };
 
 export default Home;
+
+
+
+
+
+
+
+

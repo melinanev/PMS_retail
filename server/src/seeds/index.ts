@@ -1,7 +1,7 @@
 // seedAll.js
 
 import { seedUsers } from './user-seeds.js';
-import { seedProducts } from './products-seeds.js'; // Import product seeding function
+import { seedProducts } from './products-seeds.js'; 
 import sequelize from '../config/connection.js';
 
 const seedAll = async (): Promise<void> => {
@@ -12,7 +12,7 @@ const seedAll = async (): Promise<void> => {
     await seedUsers();
     console.log('\n----- USERS SEEDED -----\n');
 
-    await seedProducts(); // Call the seedProducts function here
+    await seedProducts(); 
     console.log('\n----- PRODUCTS SEEDED -----\n');
 
     process.exit(0);

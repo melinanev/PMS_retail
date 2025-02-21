@@ -1,156 +1,136 @@
 import React, { useState, useEffect } from "react";
-import { fetchProducts, updateProduct, deleteProduct } from "../api/InventoryAPI.js"; 
+import '../styles/Inventory.css';
 
 type InventoryItem = {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  sku: string;
-  category: string;
-  quantity: number;
-  reorderPoint: number;
+    sku: string;
+    name: string;
+    category: string;
+    quantity: number;
+    price: number;
+    reorderPoint: number;
 };
 
+const initialInventory: InventoryItem[] = [
+    { sku: "PF001", name: "Premium Dog Food", category: "food", quantity: 50, price: 29.99, reorderPoint: 20 },
+    { sku: "TY001", name: "Squeaky Bone", category: "toys", quantity: 15, price: 9.99, reorderPoint: 10 }
+];
+
 const Inventory: React.FC = () => {
-  const [inventory, setInventory] = useState<InventoryItem[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState("");
-  const [alertMessage, setAlertMessage] = useState<string | null>(null);
+    const [inventory, setInventory] = useState<InventoryItem[]>(initialInventory);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [categoryFilter, setCategoryFilter] = useState("");
+    const [alertMessage, setAlertMessage] = useState<string | null>(null);
 
-  // Fetch inventory from the backend when the component mounts
-  useEffect(() => {
-    const loadInventory = async () => {
-      try {
-        const products = await fetchProducts();
-        setInventory(products);
-      } catch (error) {
-        console.error("Error loading inventory:", error);
-      }
+    useEffect(() => {
+        if (alertMessage) {
+            const timer = setTimeout(() => setAlertMessage(null), 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [alertMessage]);
+
+    useEffect(() => {
+        const fetchInventory = async () => {
+            try {
+                const response = await fetch('/api/inventory');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setInventory(data);
+            } catch (error) {
+                console.error('Error fetching inventory:', error);
+            }
+        };
+
+        fetchInventory();
+    }, []);
+
+    const sortTable = (key: keyof InventoryItem) => { 
+        const sortedInventory = [...inventory].sort((a, b) => 
+            (a[key] as any) < (b[key] as any) ? -1 : 1
+        );
+        setInventory(sortedInventory);
     };
-    loadInventory();
-  }, []);
 
-  // Show alert message for a limited time
-  useEffect(() => {
-    if (alertMessage) {
-      const timer = setTimeout(() => setAlertMessage(null), 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [alertMessage]);
+    const updateInventoryItem = (sku: string, field: keyof InventoryItem, value: string | number) => {
+        setInventory(prevInventory =>
+            prevInventory.map(item =>
+                item.sku === sku ? { ...item, [field]: value } : item
+            )
+        );
+    };
 
-  const sortTable = (key: keyof InventoryItem) => {
-    const sortedInventory = [...inventory].sort((a, b) => (a[key] < b[key] ? -1 : 1));
-    setInventory(sortedInventory);
-  };
+    const filteredInventory = inventory.filter(
+        (item) =>
+            (categoryFilter ? item.category === categoryFilter : true) &&
+            (searchTerm ? item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          item.sku.toLowerCase().includes(searchTerm.toLowerCase()) : true)
+    );
 
-  const updateInventoryItem = async (id: number, field: keyof InventoryItem, value: string | number) => {
-    try {
-      // Find the current product to retain unchanged fields
-      const currentProduct = inventory.find(item => item.id === id);
-      if (!currentProduct) return;
-
-      // Create an updated object with the current value for unchanged fields
-      const updatedProduct = {
-        id,
-        name: field === "name" ? (value as string) : currentProduct.name,
-        price: field === "price" ? (value as number) : currentProduct.price,
-        image: field === "image" ? (value as string) : currentProduct.image,
-        sku: currentProduct.sku,
-        category: currentProduct.category,
-        quantity: currentProduct.quantity,
-        reorderPoint: currentProduct.reorderPoint,
-      };
-
-      // Call updateProduct with the updated fields
-      await updateProduct(id.toString(), updatedProduct);
-      setInventory((prevInventory) =>
-        prevInventory.map((item) =>
-          item.id === updatedProduct.id ? updatedProduct : item
-        )
-      );
-    } catch (error) {
-      console.error("Error updating inventory item:", error);
-    }
-  };
-
-  const handleDelete = async (id: number) => {
-    try {
-      await deleteProduct(id.toString());
-      setInventory((prevInventory) => prevInventory.filter((item) => item.id !== id));
-    } catch (error) {
-      console.error("Error deleting inventory item:", error);
-    }
-  };
-
-  const filteredInventory = inventory.filter(
-    (item) =>
-      (categoryFilter ? item.category === categoryFilter : true) &&
-      (searchTerm
-        ? item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.sku.toLowerCase().includes(searchTerm.toLowerCase())
-        : true)
-  );
-
-  return (
-    <div>
-      <nav>
-        <button>Add New Item</button>
-        <button>Bulk Import</button>
-        <button>Export Data</button>
-      </nav>
-      <section>
-        <input
-          type="text"
-          placeholder="Search inventory..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
-          <option value="">All Categories</option>
-          <option value="food">Pet Food</option>
-          <option value="toys">Toys</option>
-          <option value="supplies">Supplies</option>
-          <option value="accessories">Accessories</option>
-        </select>
-      </section>
-      <section>
-        <table>
-          <thead>
-            <tr>
-              <th onClick={() => sortTable("sku")}>SKU</th>
-              <th onClick={() => sortTable("name")}>Item Name</th>
-              <th>Category</th>
-              <th onClick={() => sortTable("quantity")}>Quantity</th>
-              <th onClick={() => sortTable("price")}>Price</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredInventory.map((item) => (
-              <tr key={item.id}>
-                <td>{item.sku}</td>
-                <td contentEditable onBlur={(e) => updateInventoryItem(item.id, "name", e.target.innerText)}>
-                  {item.name}
-                </td>
-                <td>{item.category}</td>
-                <td contentEditable onBlur={(e) => updateInventoryItem(item.id, "quantity", Number(e.target.innerText))}>
-                  {item.quantity}
-                </td>
-                <td contentEditable onBlur={(e) => updateInventoryItem(item.id, "price", Number(e.target.innerText))}>
-                  ${item.price}
-                </td>
-                <td>
-                  <button>Edit</button>
-                  <button onClick={() => handleDelete(item.id)}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
-    </div>
-  );
+    return (
+        <div className="layout-container">
+            <main className="main-content">
+                <div className="inventory">
+                    <h1>Inventory Management</h1>
+                    <div className="inventory-controls">
+                        <input type="text" placeholder="Search inventory..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                        <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
+                            <option value="">All Categories</option>
+                            <option value="food">Pet Food</option>
+                            <option value="toys">Toys</option>
+                            <option value="supplies">Supplies</option>
+                            <option value="accessories">Accessories</option>
+                        </select>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th onClick={() => sortTable("sku")}>SKU</th>
+                                <th onClick={() => sortTable("name")}>Item Name</th>
+                                <th>Category</th>
+                                <th onClick={() => sortTable("quantity")}>Quantity</th>
+                                <th onClick={() => sortTable("price")}>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredInventory.map((item) => (
+                                <tr key={item.sku}>
+                                    <td>{item.sku}</td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            value={item.name}
+                                            onChange={(e) => updateInventoryItem(item.sku, "name", e.target.value)}
+                                        />
+                                    </td>
+                                    <td>{item.category}</td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            value={item.quantity}
+                                            onChange={(e) => updateInventoryItem(item.sku, "quantity", Number(e.target.value))}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            value={item.price}
+                                            onChange={(e) => updateInventoryItem(item.sku, "price", Number(e.target.value))}
+                                        />
+                                    </td>
+                                    <td>
+                                        <button>Edit</button>
+                                        <button>Delete</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    );
 };
 
 export default Inventory;

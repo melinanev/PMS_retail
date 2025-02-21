@@ -1,19 +1,19 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/inventory'; // Updated to match your backend route
+const API_URL = 'http://localhost:5000/inventory'; 
 
-// Assuming the token is stored in localStorage
-const token = localStorage.getItem('token'); // Replace with how you store the token
 
-// Axios instance with the Authorization header
+const token = localStorage.getItem('token'); 
+
+
 const axiosInstance = axios.create({
   headers: {
     Authorization: `Bearer ${token}`,
   },
 });
 
-// Fetch all products
-export const fetchProducts = async () => {
+// This hopefully will display all products from our database
+export const getProducts = async () => {
   try {
     const response = await axiosInstance.get(`${API_URL}`);
     return response.data.data;
@@ -23,7 +23,18 @@ export const fetchProducts = async () => {
   }
 };
 
-// Create a new product
+//This will hopefully get a single item based on ID that is passed as a param
+export const getProduct = async (id: string) => {
+  try {
+    const response = await axiosInstance.get(`${API_URL}/${id}`);
+    return response.data.data;
+  } catch (error) {
+    console.error ('Error getting product', error);
+    throw error;
+  };
+};
+
+// This creates a new product
 export const createProduct = async (product: { name: string; price: number; image: string }) => {
   try {
     const response = await axiosInstance.post(`${API_URL}`, product);
@@ -34,7 +45,7 @@ export const createProduct = async (product: { name: string; price: number; imag
   }
 };
 
-// Update an existing product
+// This ideally updates an existing product
 export const updateProduct = async (id: string, product: { name: string; price: number; image: string }) => {
   try {
     const response = await axiosInstance.put(`${API_URL}/${id}`, product);
@@ -45,7 +56,7 @@ export const updateProduct = async (id: string, product: { name: string; price: 
   }
 };
 
-// Delete a product
+// This deletes a product
 export const deleteProduct = async (id: string) => {
   try {
     const response = await axiosInstance.delete(`${API_URL}/${id}`);

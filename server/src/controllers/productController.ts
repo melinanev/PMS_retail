@@ -18,15 +18,13 @@ interface ProductParams {
   id: string;
 }
 
-// ✅ Get All Products
-// Controller to get all products
 export const getProducts = async (_: Request, res: Response) => {
   try {
-    const products = await Product.findAll();  // Fetch all products from DB
+    const products = await Product.findAll();  
     if (!products || products.length === 0) {
       return res.status(404).json({ success: false, message: 'No products found' });
     }
-    // Send back products in JSON format
+
     return res.status(200).json({ success: true, data: products });
   } catch (error) {
     console.error('Error fetching products:', error);
@@ -35,7 +33,7 @@ export const getProducts = async (_: Request, res: Response) => {
 };
 
   
-// ✅ Create a New Product
+
 export const createProduct = async (req: Request, res: Response): Promise<Response> => {
   const { sku, name, price, quantity, category, description, image }: 
     { sku: string; name: string; price: number; quantity: number; category: string; description: string; image?: string | null } = req.body;
@@ -45,7 +43,7 @@ export const createProduct = async (req: Request, res: Response): Promise<Respon
   }
 
   try {
-    const imageUrl: string | null = image ?? null; // Using null if no image is provided
+    const imageUrl: string | null = image ?? null; 
 
     const newProduct = await Product.create({
       sku,
@@ -54,7 +52,7 @@ export const createProduct = async (req: Request, res: Response): Promise<Respon
       quantity,
       category,
       description,
-      image: imageUrl, // image can be null
+      image: imageUrl, 
     });
 
     return res.status(201).json({ success: true, data: newProduct });
@@ -64,7 +62,6 @@ export const createProduct = async (req: Request, res: Response): Promise<Respon
   }
 };
 
-// ✅ Get a Single Product
 export const getProduct = async (req: Request<ProductParams>, res: Response): Promise<Response> => {
   const { id } = req.params;
 
@@ -83,9 +80,9 @@ export const getProduct = async (req: Request<ProductParams>, res: Response): Pr
       price: product.price,
       quantity: product.quantity,
       category: product.category,
-      image: product.image ?? null, // Ensure image is either null or undefined
-      createdAt: product.createdAt ?? new Date(),  // Default to current date if undefined
-      updatedAt: product.updatedAt ?? new Date(),  // Default to current date if undefined
+      image: product.image ?? null, 
+      createdAt: product.createdAt ?? new Date(),  
+      updatedAt: product.updatedAt ?? new Date(),  
     };
 
     return res.status(200).json({ success: true, data: mappedProduct });
@@ -95,7 +92,6 @@ export const getProduct = async (req: Request<ProductParams>, res: Response): Pr
   }
 };
 
-// ✅ Update a Product
 export const updateProduct = async (req: Request<ProductParams>, res: Response): Promise<Response> => {
   const { id } = req.params;
   const { sku, name, price, quantity, category, description, image }: 
@@ -103,7 +99,7 @@ export const updateProduct = async (req: Request<ProductParams>, res: Response):
 
   try {
     const [updated] = await Product.update(
-      { sku, name, price, quantity, category, description, image: image ?? null }, // Ensure image is null if not provided
+      { sku, name, price, quantity, category, description, image: image ?? null }, 
       { where: { id } }
     );
 
@@ -125,19 +121,18 @@ export const updateProduct = async (req: Request<ProductParams>, res: Response):
       price: updatedProduct.price,
       quantity: updatedProduct.quantity,
       category: updatedProduct.category,
-      image: updatedProduct.image ?? null, // Ensure image is null or undefined
-      createdAt: updatedProduct.createdAt ?? new Date(),  // Default to current date if undefined
-      updatedAt: updatedProduct.updatedAt ?? new Date(),  // Default to current date if undefined
+      image: updatedProduct.image ?? null, 
+      createdAt: updatedProduct.createdAt ?? new Date(),  
+      updatedAt: updatedProduct.updatedAt ?? new Date(),  
     };
 
     return res.status(200).json({ success: true, data: mappedUpdatedProduct });
   } catch (error) {
-    console.error("Error in updateProduct function", error);
+    console.error("Error in updating product", error);
     return res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
 
-// ✅ Delete a Product
 export const deleteProduct = async (req: Request<ProductParams>, res: Response): Promise<Response> => {
   const { id } = req.params;
 

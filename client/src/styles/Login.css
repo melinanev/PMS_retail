@@ -1,0 +1,71 @@
+/* 🌍 Ensure Full Page Uses Global Styles */
+html, body {
+    height: 100%;
+    background-color: var(--primary-bg); /* ✅ Use global background */
+  }
+  
+  /* Center Login Box & Apply Global Theme */
+  .login-main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: var(--secondary-bg);
+    box-shadow: 0 4px 10px var(--shadow-color);
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  /* Login Heading */
+  .login-main h2 {
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Form Group - Spacing Between Inputs */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  /* Input Fields */
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background: #fff;
+    color: #000;
+    outline: none;
+  }
+  
+  /* Labels */
+  .form-group label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: var(--text-color);
+  }
+  
+  /* Center the Sign-In Button & Apply Global Theme */
+  .sign-in-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-btn);
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    text-align: center;
+  }
+  
+  .sign-in-btn:hover {
+    background-color: var(--primary-btn-hover);
+  }

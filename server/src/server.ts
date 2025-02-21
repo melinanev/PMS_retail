@@ -7,11 +7,11 @@ import inventoryRouter from './routes/api/inventory-routes.js';
 import { workSessionRouter } from './routes/api/work-session-routes.js';
 import { authenticateToken } from './middleware/auth.js';
 
-// Import database connections
-import sequelize from './config/connection.js';  // Main DB connection
+
+import sequelize from './config/connection.js';  
 
 
-// Load environment variables
+
 dotenv.config();
 
 const app = express();
@@ -32,15 +32,15 @@ app.get('/', (_req, res) => {
 });
 
 
-// Sync main database (Sequelize)
+
 sequelize.sync({ force: process.env.NODE_ENV === 'development' }).then(() => {
   console.log('Main database synced!');
 }).catch((error) => {
   console.error('Error syncing database:', error);
-  process.exit(1);  // Exit the application if the DB sync fails
+  process.exit(1);  
 });
 
-// Start server
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
