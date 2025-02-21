@@ -1,13 +1,18 @@
 import { Router } from 'express';
-import authRoutes from './api/auth-routes.js';
-import inventoryRoutes from './api/inventory-routes.js'
-import { authenticateToken } from '../middleware/auth.js';
+import APIRoutes from './api/index.js';
+import {join, dirname  } from 'node:path';
+import {fileURLToPath} from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const router = Router();
 
-router.use('/auth', authRoutes);
-router.use('/inventory', inventoryRoutes);
-router.use('/authToken', authenticateToken);
+router.use('/api', APIRoutes);
+router.get('*',(_req, res) => {
+    res.sendFile(join(__dirname,"../../../client/index.html"))
+})
+
 
 
 export default router;

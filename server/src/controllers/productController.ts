@@ -21,14 +21,11 @@ interface ProductParams {
 export const getProducts = async (_: Request, res: Response) => {
   try {
     const products = await Product.findAll();  
-    if (!products || products.length === 0) {
-      return res.status(404).json({ success: false, message: 'No products found' });
-    }
-
-    return res.status(200).json({ success: true, data: products });
+     
+    return res.status(200).json(products);
   } catch (error) {
     console.error('Error fetching products:', error);
-    return res.status(500).json({ success: false, message: 'Error fetching products' });
+    return res.status(500).json({message: 'Error fetching products' });
   }
 };
 
