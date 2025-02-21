@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/inventory',
+        path: '/Inventory',
         element: <Inventory />
       },
     ],

@@ -16,6 +16,11 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
+      '/inventory': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
+      }
     },
   },
 });
