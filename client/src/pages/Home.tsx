@@ -1,16 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import "../styles/Home.css";
-import Navbar from "../components/Navbar";
+
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
     <div className="home-container">
-      <Navbar />
-      <Header />
 
       {/* BUTTON NAVIGATION */}
       <main>
@@ -25,7 +21,7 @@ const Home = () => {
         </div>
       </main>
 
-      <Footer />
+      
     </div>
   );
 };
