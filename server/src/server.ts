@@ -2,13 +2,16 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import routes from './routes/index.js'
+import path from "path";
+import { dirname  } from 'node:path';
+import {fileURLToPath} from 'node:url';
 
 import sequelize from './config/connection.js';  
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 
-
-dotenv.config();
-
+dotenv.config({ path: path.resolve(__dirname, "../../../env") });
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -24,6 +27,10 @@ app.get('/', (_req, res) => {
 });
 
 
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
 
 sequelize.sync({ force: process.env.NODE_ENV === 'development' }).then(() => {
   console.log('Main database synced!');
@@ -33,6 +40,3 @@ sequelize.sync({ force: process.env.NODE_ENV === 'development' }).then(() => {
 });
 
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
