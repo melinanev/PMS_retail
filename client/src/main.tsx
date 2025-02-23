@@ -8,6 +8,7 @@ import ErrorPage from './pages/ErrorPage.tsx';
 import Home from './pages/Home.tsx';
 import Login from './pages/Login.tsx';
 import Inventory from './pages/Inventory.tsx';
+import Users from './pages/Employee.tsx'
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
         path: '/Inventory',
         element: <Inventory />
       },
+      {
+        path: "/users",
+        element: <Users />
+      }
     ],
   },
 ]);

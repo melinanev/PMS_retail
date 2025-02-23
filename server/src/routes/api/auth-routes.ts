@@ -1,46 +1,38 @@
-import { Router, Request, Response } from "express";
-import { User } from "../../models/user.js";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
+import express, { Request, Response } from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { User } from '../../models/user.js';  // Adjust the path as needed
 
-dotenv.config();
+const router = express.Router();
 
-const router = Router();
-const JWT_SECRET = process.env.JWT_SECRET_KEY || "your_jwt_secret";
-
-// This does the registering 
+// Register route
 router.post("/register", async (req: Request, res: Response) => {
-  const { username, email, password, role } = req.body;
+  const { username, password, firstName, lastName, email, role } = req.body;
 
-  if (!username || !email || !password) {
+  if (!username || !password || !email || !firstName || !lastName) {
     return res.status(400).json({ message: "Please provide all required fields" });
   }
 
   try {
-    
-    const existingUser = await User.findOne({ where: { email } });
-    if (existingUser) {
-      return res.status(400).json({ message: "Email already registered" });
-    }
+    const existingUser = await User.findOne({ where: { username } });
+    if (existingUser) return res.status(400).json({ message: "Username already taken" });
 
-    // This hashes and salts our password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    
     const newUser = await User.create({
       username,
-      email,
       password: hashedPassword,
-      role: role || "user",
+      firstName,
+      lastName,
+      email,
+      role
     });
 
-   return res.status(201).json({ message: "User registered successfully!", user: newUser });
-  } catch (error: any) {
-   return res.status(500).json({ message: "Error registering user", error: error.message });
+    return res.status(201).json({ message: "User registered successfully", user: newUser });
+  } catch (error) {
+    return res.status(500).json({ message: "Error registering user", error});
   }
 });
-
 
 router.post("/login", async (req: Request, res: Response) => {
   const { username, password } = req.body;
@@ -50,24 +42,26 @@ router.post("/login", async (req: Request, res: Response) => {
   }
 
   try {
-    // Finds a username in our DB
     const user = await User.findOne({ where: { username } });
     if (!user) return res.status(401).json({ message: "Authentication failed" });
 
-    // Compares the input to saved passwords
     const passwordIsValid = await bcrypt.compare(password, user.password);
+    console.log("Password validation result:", passwordIsValid);
+
     if (!passwordIsValid) return res.status(401).json({ message: "Authentication failed" });
 
-    // Generates JWT token
-    const token = jwt.sign({ id: user.id, role: user.role }, JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ id: user.id, role: user.role }, 'your_jwt_secret', { expiresIn: "1h" });
 
-   return res.json({
+    return res.json({
       token,
-      user: { id: user.id, username: user.username, email: user.email, role: user.role },
+      user: { id: user.id, username: user.username },
     });
-  } catch (error: any) {
-   return res.status(500).json({ message: "Error logging in", error: error.message });
+  } catch (error) {
+    return res.status(500).json({ message: "Error logging in", error });
   }
 });
+
+
+
 
 export default router;

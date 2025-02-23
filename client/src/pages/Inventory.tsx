@@ -9,7 +9,6 @@ type InventoryItem = {
   description: string;
   price: number;
   quantity: number;
-  reorderPoint: number;
   category: string;
   image?: string | null;
 };
@@ -30,7 +29,6 @@ const Inventory: React.FC = () => {
     description: "",
     sku: "",
     image: null,
-    reorderPoint: 0,
   });
 
   
@@ -56,14 +54,18 @@ const Inventory: React.FC = () => {
   }, [alertMessage]);
 
   
-  const filteredInventory = inventory.filter(
-    (item) =>
-      (categoryFilter ? item.category === categoryFilter : true) &&
-      (searchTerm
-        ? item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.id.toLowerCase().includes(searchTerm.toLowerCase())
-        : true)
-  );
+  const filteredInventory = inventory.filter((item) => {
+    const matchesSearchTerm =
+      item.sku?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.category?.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    const matchesCategoryFilter =
+      categoryFilter === "" || item.category === categoryFilter;
+  
+    return matchesSearchTerm && matchesCategoryFilter;
+  });
+  
 
   
   const handleDelete = async (id: string) => {
@@ -117,7 +119,7 @@ const Inventory: React.FC = () => {
     }
   };
 
-  // Handle field changes in the edit form
+  
   const handleFieldChange = (field: keyof InventoryItem, value: string | number) => {
     if (editingProduct) {
       setEditingProduct({
@@ -168,7 +170,6 @@ const Inventory: React.FC = () => {
         description: "",
         sku: "",
         image: null,
-        reorderPoint: 0,
       });
       setAddingProduct(false); 
       setAlertMessage("Product added successfully");
@@ -305,14 +306,6 @@ const Inventory: React.FC = () => {
                 />
               </div>
               <div>
-                <input
-                  type="number"
-                  value={editingProduct.reorderPoint}
-                  onChange={(e) => handleFieldChange("reorderPoint", parseInt(e.target.value))}
-                  placeholder="Reorder Point"
-                />
-              </div>
-              <div>
                 <textarea
                   value={editingProduct.description}
                   onChange={(e) => handleFieldChange("description", e.target.value)}
@@ -380,14 +373,6 @@ const Inventory: React.FC = () => {
                   value={newProduct.quantity || ""}
                   onChange={(e) => setNewProduct({ ...newProduct, quantity: parseInt(e.target.value) || 0 })}
                   placeholder="Quantity"
-                />
-              </div>
-              <div>
-                <input
-                  type="number"
-                  value={newProduct.reorderPoint || ""}
-                  onChange={(e) => setNewProduct({ ...newProduct, reorderPoint: parseInt(e.target.value) || 0 })}
-                  placeholder="Reorder Point"
                 />
               </div>
               <div>

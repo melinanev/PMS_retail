@@ -16,8 +16,8 @@ const Home = () => {
           <button className="button" onClick={() => navigate("/app/customers")}>Customers</button>
           <button className="button" onClick={() => navigate("/app/suppliers")}>Suppliers</button>
           <button className="button" onClick={() => navigate("/app/services")}>Services</button>
-          <button className="button" onClick={() => navigate("/app/billing")}>Billing</button>
-          <button className="button">PLACEHOLDER</button>
+          <button className="button" onClick={() => navigate("/inventory")}>Inventory</button>
+          <button className="button" onClick={() => navigate("/users")}>Employees</button>
         </div>
       </main>
 

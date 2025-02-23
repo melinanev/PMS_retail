@@ -7,9 +7,11 @@ CREATE DATABASE authUser_db;
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
+    firstName VARCHAR(50),
+    lastName VARCHAR(50),
     email VARCHAR(100) UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
-    role VARCHAR(20) NOT NULL CHECK (role IN ('manager', 'employee')),
+    role VARCHAR(20) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_login TIMESTAMP
 );
@@ -31,11 +33,9 @@ CREATE TABLE products (
 
 CREATE TABLE WORK_SESSION (
     id SERIAL PRIMARY KEY,
-    employee_id INT NOT NULL,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     clock_in TIMESTAMP NOT NULL,
     clock_out TIMESTAMP,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (employee_id) REFERENCES users(id) ON DELETE CASCADE
+    total_hours INTERVAL DEFAULT '0 hours'
 );
 
