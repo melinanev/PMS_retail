@@ -45,4 +45,3 @@ _Example of the Vetra Home Dashboard_
 ```sh
 git clone https://github.com/your-repo/vetra.git
 cd vetra
-
