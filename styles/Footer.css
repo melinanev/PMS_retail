@@ -1,0 +1,13 @@
+.footer {
+  width: 100vw;
+  height: 8vh;
+  background-color: #2d3e50;
+  display: flex;
+  justify-content: center; /* Center everything */
+  align-items: center;
+  padding: 0 20px;
+}
+
+.footer p {
+  color:aliceblue
+}
