@@ -3,6 +3,7 @@
   width: 100vw;
   height: 8vh;
   background-color: #2d3e50;
+  position: fixed;
   display: flex;
   justify-content: center; /* Center everything */
   align-items: center;
@@ -37,4 +38,19 @@
 .navbar-auth {
   position: absolute;
   right: 20px;
+}
+
+.logout-button {
+  background-color: #5e81ac;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+}
+
+.logout-button:hover {
+  background-color: #4c6fa1;
 }
