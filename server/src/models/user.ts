@@ -4,9 +4,11 @@ import bcrypt from 'bcrypt';
 interface UserAttributes {
   id: number;
   username: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
-  role: 'manager' | 'employee';
+  role: string;
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
@@ -17,20 +19,28 @@ export class User
 {
   public id!: number;
   public username!: string;
+  public firstName!: string;
+  public lastName!: string;
   public email!: string;
   public password!: string;
-  public role!: 'manager' | 'employee';
+  public role!: string;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
-  // Hash password before saving
-  public async setPassword(password: string) {
-    const saltRounds = 10;
-    this.password = await bcrypt.hash(password, saltRounds);
-  }
+  
+  
+public async setPassword(password: string) {
+  const saltRounds = 10;
 
-  // This validates the password by comparing the saved password and the one entered
+  if (!password.startsWith('$2b$')) { 
+    this.password = await bcrypt.hash(password, saltRounds);
+  } else {
+    this.password = password; 
+  }
+}
+
+
   public async validatePassword(password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);
   }
@@ -49,10 +59,21 @@ export function UserFactory(sequelize: Sequelize): typeof User {
         allowNull: false,
         unique: true,
       },
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "N/A",
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "N/A",
+      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+        defaultValue: "user@email.com",
         validate: { isEmail: true },
       },
       password: {
@@ -60,8 +81,9 @@ export function UserFactory(sequelize: Sequelize): typeof User {
         allowNull: false,
       },
       role: {
-        type: DataTypes.ENUM('manager', 'employee'),
+        type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: "N/A",
       },
     },
     {

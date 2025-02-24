@@ -1,8 +1,9 @@
 import type { UserLogin } from '../interfaces/UserLogin';
 
+// Login function
 const login = async (userInfo: UserLogin) => {
   try {
-    const response = await fetch('/auth-routes/login', {
+    const response = await fetch('/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -10,13 +11,13 @@ const login = async (userInfo: UserLogin) => {
       body: JSON.stringify(userInfo),
     });
 
-    const data = await response.json();
-
     if (!response.ok) {
-      throw new Error('User information not retrieved, check network tab!');
+      const error = await response.json(); 
+      throw new Error(error.message || 'User information not retrieved, check network tab!');
     }
 
-    localStorage.setItem('token', data.token);
+    const data = await response.json(); 
+    localStorage.setItem('token', data.token); 
 
     return data;
   } catch (err) {
@@ -25,4 +26,38 @@ const login = async (userInfo: UserLogin) => {
   }
 };
 
-export { login };
+// Register function
+const register = async (username: string, password: string, firstName: string, lastName: string, email: string) => {
+  try {
+    const response = await fetch("/api/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+        firstName,  
+        lastName,   
+        email,
+        role: "N/A"  
+      }),
+    });
+
+    if (!response.ok) {
+      
+      const error = await response.json(); 
+      throw new Error(error.message || "Registration failed");
+    }
+
+    const data = await response.json(); 
+    console.log("User registered successfully:", data);
+    return data;  
+
+  } catch (error) {
+    console.error("Error from user registration:", error);
+    return Promise.reject("Registration failed");
+  }
+};
+
+export { login, register };

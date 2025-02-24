@@ -37,10 +37,11 @@ router.get('/:id', async (req: Request, res: Response) => {
 
 // This post defines a user by params and sets them for registration 
 
-router.post('/', async (req: Request, res: Response) => {
-  const { username, email, password, role } = req.body;
+router.post('/', async (req: Request, res: Response): Promise<Response> => {
+  const { username, firstName, lastName, email, password, role }:
+  {username: string; firstName: string; lastName: string; email: string; password: string, role: string} = req.body;
 
-  if (!username || !email || !password) {
+  if (!username || !firstName || !lastName|| !email || !password || !role) {
     return res.status(400).json({ message: 'Please provide all required fields' });
   }
 
@@ -55,10 +56,10 @@ router.post('/', async (req: Request, res: Response) => {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10); 
-    const newUser = await User.create({ username, email, password: hashedPassword, role });
-    res.status(201).json(newUser);
+    const newUser = await User.create({ username, firstName, lastName, email, password: hashedPassword, role });
+   return res.status(201).json(newUser);
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+   return res.status(400).json({ message: error.message });
   }
 });
 
@@ -66,8 +67,8 @@ router.post('/', async (req: Request, res: Response) => {
 
 router.put('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { username, password } = req.body;
-  if (!username || !password) {
+  const { username, firstName, lastName, email, role } = req.body;
+  if (!username || !firstName || !lastName || !email || !role) {
     return res.status(400).json({ message: 'Please provide username and password' });
   }
 
@@ -75,14 +76,17 @@ router.put('/:id', async (req: Request, res: Response) => {
     const user = await User.findByPk(id);
     if (user) {
       user.username = username;
-      user.password = await bcrypt.hash(password, 10); // Hash the new password
+      user.firstName = firstName;
+      user.lastName = lastName;
+      user.email = email;
+      user.role = role;
       await user.save();
-      res.json(user);
+    return res.json(user);
     } else {
-      res.status(404).json({ message: 'User not found' });
+     return res.status(404).json({ message: 'User not found' });
     }
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+   return res.status(400).json({ message: error.message });
   }
 });
 
