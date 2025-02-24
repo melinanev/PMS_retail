@@ -17,11 +17,10 @@ router.post("/register", async (req: Request, res: Response) => {
     const existingUser = await User.findOne({ where: { username } });
     if (existingUser) return res.status(400).json({ message: "Username already taken" });
 
-    const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await User.create({
       username,
-      password: hashedPassword,
+      password,
       firstName,
       lastName,
       email,
