@@ -1,13 +1,20 @@
-import "../styles/Services.css"; 
+import { useNavigate } from "react-router-dom";
+import SoonCome from '../assets/images/SoonCome.png';
+import "../styles/Services.css";
 
 const Services = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="services-container">     
-      <main className="services-main">
-        <h1>Services</h1>
-        <p>Manage the services offered by the store.</p>
-      </main>
-    </div>
+    <main className="soon-container"><div className="soon-image">
+        <img className="soon-png" src={SoonCome} alt="Coming soon placeholder" />
+      </div>
+      <div className="soon-text">
+        <h2>Hang tight! This feature is coming soon!</h2>
+        <button className="soon-button" onClick={() => navigate("/home")}>Go Back Home</button>
+      </div>
+      
+    </main>
   );
 };
 

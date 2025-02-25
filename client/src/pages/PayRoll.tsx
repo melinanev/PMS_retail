@@ -1,13 +1,20 @@
-import "../styles/PayRoll.css"; // ✅ Updated filename to match your naming
+import { useNavigate } from "react-router-dom";
+import SoonCome from '../assets/images/SoonCome.png';
+import "../styles/TimeClock.css";
 
 const PayRoll = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="payroll-container">    
-      <main className="payroll-main">
-        <h1>Payroll</h1>
-        <p>Manage employee payroll and salaries here.</p>
-      </main> 
-    </div>
+    <main className="soon-container"><div className="soon-image">
+        <img className="soon-png" src={SoonCome} alt="Coming soon placeholder" />
+      </div>
+      <div className="soon-text">
+        <h2>Hang tight! This feature is coming soon!</h2>
+        <button className="soon-button" onClick={() => navigate("/home")}>Go Back Home</button>
+      </div>
+      
+    </main>
   );
 };
 

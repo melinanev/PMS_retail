@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import SoonCome from '../assets/images/SoonCome.png';
-import "../styles/Report.css";
+import "../styles/Settings.css";
 
-const Reports = () => {
+const Settings = () => {
   const navigate = useNavigate();
 
   return (
@@ -18,4 +18,4 @@ const Reports = () => {
   );
 };
 
-export default Reports;
+export default Settings;
