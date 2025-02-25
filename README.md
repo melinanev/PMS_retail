@@ -29,14 +29,14 @@
 ---
 
 ## 📸 Screenshots
-![Vetra Dashboard](./screenshots/dashboard.png)
+![Vetra Dashboard](./client/src/assets/images/Preview.png)
 _Example of the Vetra Home Dashboard_
 
 ---
 
 ## 🌐 Deployment
-- **Live Application:** [Vetra on Render](#)
-- **GitHub Repository:** [GitHub Repo](#)
+- **Live Application:** [https://pms-retail.onrender.com/](#)
+- **GitHub Repository:** [https://github.com/melinanev/PMS_retail](#)
 
 ---
 
