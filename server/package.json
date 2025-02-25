@@ -5,9 +5,9 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node dist/server.js",
     "build": "tsc",
-    "dev": "nodemon src/index.ts",
+    "dev": "nodemon src/server.ts",
     "seed": "npm run build && node dist/seeds/index.js"
   },
   "nodemonConfig": {
