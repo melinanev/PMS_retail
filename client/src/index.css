@@ -12,27 +12,23 @@
 }
 
 
+/* Global Mobile-Friendly Adjustments */
+@media (max-width: 768px) {
+  main, .container {
+    padding: 10px;
+  }
 
+  h1, h2 {
+    font-size: 1.5rem;
+  }
 
+  button {
+    padding: 10px 15px;
+    font-size: 1rem;
+  }
 
-/* ✅ Navbar Fixes */
-.navbar {
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  align-items: center;
-  height: 7vh;
-  background-color: #2d3e50;
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
-
-.navbar-nav {
-  display: flex;
-  justify-content: center;
-  gap: 120px;
-}
-
-.navbar-nav a {
-  color: white;
-  padding: 10px 50px;
-}
-
