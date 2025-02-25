@@ -1,65 +1,70 @@
 /* 🌍 Header Styles */
+@import url('https://fonts.googleapis.com/css2?family=Phudu:wght@300..900&family=Ranchers&display=swap');
+
 .header {
-  width: 100%;
-  background-color: var(--secondary-bg);
-  padding: 20px;
-  color: var(--text-color);
-  text-align: center;
-  border-bottom: 3px solid #a89c8b;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.header-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  text-align: center;
-  padding-bottom: 1px; /* ✅ Ensures space below the header */
-}
-
-/* ✅ Flexbox for Logo + Title */
-.logo-title-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
+    width: 100%;
+    background-color: var(--secondary-bg);
+    padding: 20px;
+    color: var(--text-color);
+    text-align: center;
+    border-bottom: 3px solid #a89c8b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-
-/* ✅ Logo Styling */
-.vetra-logo {
-  width: 60px;
-  height: auto;
-  padding: 0;
-  margin: 0;
-}
-/* ✅ Paw Icon Styling */
-.paw-icon {
-  font-size: 30px; /* ✅ Makes the paw bigger */
-  margin: 0 15px; /* ✅ Adds space between paw and logo/title */
-}
-
-/* ✅ Move Slogan Below Logo + Title */
-.header-slogan {
-  display: block; /* ✅ Forces a new line */
-  width: 100%;
-  text-align: center;
-  font-size: 1.5rem;
+  
+  .header-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    font-family: "phudu";
+    padding-bottom: 1px; /* ✅ Ensures space below the header */
   }
-
-/* ✅ Styles for the "Hello, Employee!" Text */
-.header-text {
-  font-size: 1.2rem; /* Adjust if needed */
-  font-weight: bold;
-  text-align: center;
-  color: var(--text-color); /* ✅ Matches global text color */
-}
-
-/* ✅ Emoji Styling */
-.emoji {
-  font-size: 18px;
-  margin: 0 5px;
-}
+  
+  /* ✅ Flexbox for Logo + Title */
+  .logo-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    }
+  
+  /* ✅ Logo Styling */
+  .vetra-logo {
+    width: 60px;
+    height: auto;
+    padding: 0;
+    margin: 0;
+  }
+  /* ✅ Paw Icon Styling */
+  .paw-icon {
+    font-size: 30px; /* ✅ Makes the paw bigger */
+    margin: 0 15px; /* ✅ Adds space between paw and logo/title */
+  }
+  
+  /* ✅ Move Slogan Below Logo + Title */
+  .header-slogan {
+    display: block; /* ✅ Forces a new line */
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: "phudu";
+    }
+  
+  /* ✅ Styles for the "Hello, Employee!" Text */
+  .header-text {
+    font-size: 1.0rem;
+    font-family: "phudu"; /* Adjust if needed */
+    text-align: center;
+    color: var(--text-color); /* ✅ Matches global text color */
+  }
+  
+  /* ✅ Emoji Styling */
+  .emoji {
+    font-size: 18px;
+    margin: 0 5px;
+  }
